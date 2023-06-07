@@ -1,7 +1,22 @@
-// jshint ignore: start
 if (Process.loopProtectionEnabled) {
     Process.loopProtectionEnabled = false;
     Process.restart();
+}
+
+function factorial(n) {
+    let product = n;
+    for (let i = n - 1; i > 0; i--) {
+        product *= i;
+    }
+    return product;
+}
+
+function nCr(n, r) {
+    return factorial(n) / (factorial(r) * factorial(n - r));
+}
+
+function nPr(n, r) {
+    return factorial(n) / factorial(n - r);
 }
 
 function calcNumPaths(gridSize) {
@@ -10,8 +25,9 @@ function calcNumPaths(gridSize) {
     
     for (let j = 0; j < numMoves - 1; j++) {
         for (let i = 0, l = ways.length; i < l; i++) {
-            ways.push([ways[i][0] + 1, ways[i][1]]);
-            ways[i][1]++;
+            let path = ways[i];
+            ways.push([path[0] + 1, path[1]]);
+            path[1]++;
         }
     }
     
@@ -23,6 +39,4 @@ function calcNumPaths(gridSize) {
     return num;
 }
 
-println(calcNumPaths(12));
-
-
+// println(calcNumPaths(12));
